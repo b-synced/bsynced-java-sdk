@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalogue_item_notification:catalogueItemNotificationMessage xmlns:sh="http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader"
+                                                              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                                                              xmlns:catalogue_item_notification="urn:gs1:gdsn:catalogue_item_notification:xsd:3"
+                                                              xsi:schemaLocation="http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader http://www.gs1globalregistry.net/3.1/schemas/sbdh/StandardBusinessDocumentHeader.xsd urn:gs1:gdsn:catalogue_item_notification:xsd:3 http://www.gs1globalregistry.net/3.1/schemas/gs1/gdsn/CatalogueItemNotification.xsd">
+   <sh:StandardBusinessDocumentHeader>
+      <sh:HeaderVersion>1.0</sh:HeaderVersion>
+      <sh:Sender>
+         <sh:Identifier Authority="GS1">4260431039918</sh:Identifier>
+      </sh:Sender>
+      <sh:Receiver>
+         <sh:Identifier Authority="GS1">4260590810014</sh:Identifier>
+      </sh:Receiver>
+      <sh:DocumentIdentification>
+         <sh:Standard>GS1</sh:Standard>
+         <sh:TypeVersion>3.1</sh:TypeVersion>
+         <sh:InstanceIdentifier>80db1ba2-f803-441a-bd40-a15fe90315c8</sh:InstanceIdentifier>
+         <sh:Type>catalogueItemNotification</sh:Type>
+         <sh:MultipleType>false</sh:MultipleType>
+         <sh:CreationDateAndTime>2018-04-10T15:36:30+02:00</sh:CreationDateAndTime>
+      </sh:DocumentIdentification>
+   </sh:StandardBusinessDocumentHeader>
+   <transaction>
+      <transactionIdentification>
+         <entityIdentification>80db1ba2-f803-441a-bd40-a15fe90315c8</entityIdentification>
+         <contentOwner>
+            <gln>4260431039918</gln>
+         </contentOwner>
+      </transactionIdentification>
+      <documentCommand>
+         <documentCommandHeader type="ADD">
+            <documentCommandIdentification>
+               <entityIdentification>80db1ba2-f803-441a-bd40-a15fe90315c8</entityIdentification>
+               <contentOwner>
+                  <gln>4260431039918</gln>
+               </contentOwner>
+            </documentCommandIdentification>
+         </documentCommandHeader>
+         <catalogue_item_notification:catalogueItemNotification>
+            <creationDateTime>2018-04-10T15:36:30+02:00</creationDateTime>
+            <documentStatusCode>ORIGINAL</documentStatusCode>
+            <documentStructureVersion>3.1</documentStructureVersion>
+            <lastUpdateDateTime>2018-04-10T15:36:30+02:00</lastUpdateDateTime>
+            <catalogueItemNotificationIdentification>
+               <entityIdentification>80db1ba2-f803-441a-bd40-a15fe90315c8</entityIdentification>
+               <contentOwner>
+                  <gln>4260431039918</gln>
+               </contentOwner>
+            </catalogueItemNotificationIdentification>
+            <isReload>false</isReload>
+            <catalogueItem><dataRecipient>4260590810014</dataRecipient>
+               <catalogueItemState>
+                  <catalogueItemStateCode>IN_PROGRESS</catalogueItemStateCode>
+               </catalogueItemState>
+               <tradeItem>
+                  <gtin>02041000246621</gtin>
+                  <isTradeItemABaseUnit>true</isTradeItemABaseUnit>
+                  <isTradeItemAConsumerUnit>true</isTradeItemAConsumerUnit>
+                  <isTradeItemADespatchUnit>false</isTradeItemADespatchUnit>
+                  <isTradeItemAnInvoiceUnit>true</isTradeItemAnInvoiceUnit>
+                  <isTradeItemAnOrderableUnit>true</isTradeItemAnOrderableUnit>
+                  <tradeItemUnitDescriptorCode>BASE_UNIT_OR_EACH</tradeItemUnitDescriptorCode>
+                  <informationProviderOfTradeItem>
+                     <gln>4260431039918</gln>
+                     <partyName>Client DS1 (b-synced)</partyName>
+                  </informationProviderOfTradeItem>
+                  <gdsnTradeItemClassification>
+                     <gpcCategoryCode>99999999</gpcCategoryCode>
+                     <gpcCategoryDefinition>Temporary Classification</gpcCategoryDefinition>
+                     <gpcCategoryName>Temporary Classification</gpcCategoryName>
+                  </gdsnTradeItemClassification>
+
+                  <targetMarket>
+                     <targetMarketCountryCode>276</targetMarketCountryCode>
+                  </targetMarket>
+                  <tradeItemInformation>
+                     <extension>
+                        <delivery_purchasing_information:deliveryPurchasingInformationModule xmlns:delivery_purchasing_information="urn:gs1:gdsn:delivery_purchasing_information:xsd:3"
+                                                                                             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                                                                                             xsi:schemaLocation="urn:gs1:gdsn:delivery_purchasing_information:xsd:3 http://www.gdsregistry.org/3.1/schemas/gs1/gdsn/DeliveryPurchasingInformationModule.xsd">
+                           <deliveryPurchasingInformation>
+                              <startAvailabilityDateTime>2018-05-10T15:36:30+02:00</startAvailabilityDateTime>
+                           </deliveryPurchasingInformation>
+                        </delivery_purchasing_information:deliveryPurchasingInformationModule>
+                        <trade_item_description:tradeItemDescriptionModule xmlns:trade_item_description="urn:gs1:gdsn:trade_item_description:xsd:3"
+                                                                           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                                                                           xsi:schemaLocation="urn:gs1:gdsn:trade_item_description:xsd:3 http://www.gdsregistry.org/3.1/schemas/gs1/gdsn/TradeItemDescriptionModule.xsd">
+                           <tradeItemDescriptionInformation>
+                              <descriptionShort languageCode="en">EACH</descriptionShort>
+                              <functionalName languageCode="en">Data Pool to define</functionalName>
+                              <tradeItemDescription languageCode="en">EACH</tradeItemDescription>
+                              <brandNameInformation>
+                                 <brandName>B-synced_TT3</brandName>
+                              </brandNameInformation>
+                           </tradeItemDescriptionInformation>
+                        </trade_item_description:tradeItemDescriptionModule>
+                        <trade_item_measurements:tradeItemMeasurementsModule xmlns:trade_item_measurements="urn:gs1:gdsn:trade_item_measurements:xsd:3"
+                                                                             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                                                                             xsi:schemaLocation="urn:gs1:gdsn:trade_item_measurements:xsd:3 http://www.gdsregistry.org/3.1/schemas/gs1/gdsn/TradeItemMeasurementsModule.xsd">
+                           <tradeItemMeasurements>
+                              <depth measurementUnitCode="CMT">1</depth>
+                              <height measurementUnitCode="CMT">1</height>
+                              <netContent measurementUnitCode="KGM">1</netContent>
+                              <width measurementUnitCode="CMT">1</width>
+                              <tradeItemWeight>
+                                 <grossWeight measurementUnitCode="KGM">1</grossWeight>
+                              </tradeItemWeight>
+                           </tradeItemMeasurements>
+                        </trade_item_measurements:tradeItemMeasurementsModule>
+                        <variable_trade_item_information:variableTradeItemInformationModule xmlns:variable_trade_item_information="urn:gs1:gdsn:variable_trade_item_information:xsd:3"
+                                                                                            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                                                                                            xsi:schemaLocation="urn:gs1:gdsn:variable_trade_item_information:xsd:3 http://www.gdsregistry.org/3.1/schemas/gs1/gdsn/VariableTradeItemInformationModule.xsd">
+                          <variableTradeItemInformation>
+                                <isTradeItemAVariableUnit>false</isTradeItemAVariableUnit>
+                          </variableTradeItemInformation>
+                        </variable_trade_item_information:variableTradeItemInformationModule>
+                     </extension>
+                  </tradeItemInformation>
+                  <tradeItemSynchronisationDates>
+                     <lastChangeDateTime>2018-04-10T15:36:30+02:00</lastChangeDateTime>
+                     <effectiveDateTime>2018-04-10T15:36:30+02:00</effectiveDateTime>
+                     <publicationDateTime>2018-04-10T15:36:30+02:00</publicationDateTime>
+                  </tradeItemSynchronisationDates>
+               </tradeItem>
+            </catalogueItem>
+         </catalogue_item_notification:catalogueItemNotification>
+      </documentCommand>
+   </transaction>
+</catalogue_item_notification:catalogueItemNotificationMessage>

@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <title>Integrating the b-synced-api-client into the source project.</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/hljs-github.min.css"/>
+  </head>
+  <body>
+    <article class="markdown-body"><h1 id="integrating-the-b-synced-api-client-into-the-source-project."><a class="header-link" href="#integrating-the-b-synced-api-client-into-the-source-project."></a>Integrating the b-synced-api-client into the source project.</h1>
+<p>Have to download the source code for b-synced-api-client from the  <a href="https://bitbucket-id/bctechnologies/b-synced-java-api-client">https://bitbucket-id/bctechnologies/b-synced-java-api-client</a> and have to build using maven that will give us a JAR file.</p>
+<p>Maven command to build b-synced-api-client code</p>
+<pre class="hljs"><code>    <span class="hljs-keyword">mvn </span>clean install</code></pre><h3 id="after-that-have-to-run-the-following-command"><a class="header-link" href="#after-that-have-to-run-the-following-command"></a>After that have to run the following command</h3>
+<pre class="hljs"><code>mvn install:install-file <span class="hljs-attr">-Dfile=&lt;jar</span> file path&gt;/api-<span class="hljs-number">1.0</span>.<span class="hljs-number">0</span>.jar <span class="hljs-attr">-DgroupId=de.bctechnologies</span> <span class="hljs-attr">-DartifactId=api</span> <span class="hljs-attr">-Dversion=1.0.0</span> <span class="hljs-attr">-Dpackaging=jar</span>
+</code></pre><p>The above command will add jar file to our local maven repository</p>
+<p>Then add the following dependency to our source project</p>
+<pre class="hljs"><code>    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>de.bctechnologies<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>api<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></code></pre><p>The above dependency will get downloaded into the our project and from here we can start working with the b-synced-client.</p>
+<h2 id="usage-of-the-bsyncedapiclient-jar"><a class="header-link" href="#usage-of-the-bsyncedapiclient-jar"></a>Usage of the BsyncedAPIClient jar</h2>
+<h2 id="code-snippet-of-bsyncedapiclient"><a class="header-link" href="#code-snippet-of-bsyncedapiclient"></a>Code snippet of BSyncedAPIClient</h2>
+<pre class="hljs"><code>    <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BSyncedAPIClient</span> </span>{
+        <span class="hljs-comment">/**
+         * Initialise {<span class="hljs-doctag">@link</span> BSyncedAPIClient} with URL and user credentials.
+         * {<span class="hljs-doctag">@link</span> BSyncedAPIClient#auth()} should be called before making the first HTTP request.
+         *
+         * <span class="hljs-doctag">@param</span> host default is "app.b-synced.io"
+         * <span class="hljs-doctag">@param</span> port default is "80"
+         * <span class="hljs-doctag">@param</span> uid in the form of "user1@examp1e.com"
+         * <span class="hljs-doctag">@param</span> password in plain text
+         * <span class="hljs-doctag">@throws</span> NoSuchAlgorithmException
+         * <span class="hljs-doctag">@throws</span> KeyStoreException
+         * <span class="hljs-doctag">@throws</span> KeyManagementException
+         */</span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">BSyncedAPIClient</span><span class="hljs-params">(String host, String port, String uid, String password)</span> <span class="hljs-keyword">throws</span> KeyManagementException, KeyStoreException, NoSuchAlgorithmException </span>{
+        <span class="hljs-keyword">this</span>.apiContext = <span class="hljs-keyword">new</span> BSyncedAPIContext(host, port, uid, password);
+
+        }
+    }
+</code></pre><h3 id="for-creating-object-for-bsyncedapiclient"><a class="header-link" href="#for-creating-object-for-bsyncedapiclient"></a>For creating object for BSyncedAPIClient</h3>
+<p>we have to pass the user credentials for the b-synced and host and port</p>
+<pre class="hljs"><code>    BSyncedAPIClient <span class="hljs-keyword">client</span> = <span class="hljs-keyword">new</span> BSyncedAPIClient(<span class="hljs-string">'host'</span>,<span class="hljs-string">'port'</span>,<span class="hljs-string">'uid'</span>,<span class="hljs-string">'password'</span>);
+
+    access-token: efjvoJSNEYShYlBhRUdBTA
+    <span class="hljs-keyword">client</span>: Hg8m7NzQEFGVkiUgLAIVXkNokg
+    uid: username
+    password: password</code></pre><h3 id="if-we-want-to-pulish-cin-message-to-the-b-synced"><a class="header-link" href="#if-we-want-to-pulish-cin-message-to-the-b-synced"></a>If we want to pulish CIN message to the b-synced</h3>
+<h5 id="endpoints-to-the-b-synced-for-posting-a-cin-message."><a class="header-link" href="#endpoints-to-the-b-synced-for-posting-a-cin-message."></a>Endpoints to the b-synced for posting a CIN message.</h5>
+<pre class="hljs"><code>    . Production <span class="hljs-symbol">environment:</span> <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/app.b-synced.io/api</span><span class="hljs-regexp">/v1/gdsn</span><span class="hljs-regexp">/messages/</span>
+    . Test <span class="hljs-symbol">environment:</span> <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/test.b-synced.io/api</span><span class="hljs-regexp">/v1/gdsn</span><span class="hljs-regexp">/messages/</span></code></pre><h5 id="method-type"><a class="header-link" href="#method-type"></a>Method type</h5>
+<pre class="hljs"><code>    [POST]</code></pre><h5 id="headers"><a class="header-link" href="#headers"></a>Headers</h5>
+<pre class="hljs"><code><span class="hljs-attr">    access-token:</span> &lt;access-token<span class="hljs-string">&gt;
+</span><span class="hljs-attr">    client:</span> &lt;client<span class="hljs-string">&gt;
+</span><span class="hljs-attr">    uid:</span> &lt;uid<span class="hljs-string">&gt;
+</span><span class="hljs-attr">    Content-type:</span> applciation/xml</code></pre><h5 id="request-body"><a class="header-link" href="#request-body"></a>Request body</h5>
+<pre class="hljs"><code>    Request Body: &lt;?<span class="hljs-built_in">xml</span> version=<span class="hljs-string">"1.0"</span><span class="hljs-params">...</span>&gt; <span class="hljs-keyword">in</span> UTF<span class="hljs-number">-8</span> encoding</code></pre><h5 id="code-snippet."><a class="header-link" href="#code-snippet."></a>Code snippet.</h5>
+<pre class="hljs"><code>    <span class="hljs-comment">/**
+     * Wrapper for HTTP postGdsnMessage method.
+     * It validates and store the credentials automatically
+     *
+     * <span class="hljs-doctag">@param</span> path URL of the HTTP request
+     * <span class="hljs-doctag">@param</span> entity entity to post
+     * <span class="hljs-doctag">@param</span> contentType content type of the entity
+     * <span class="hljs-doctag">@param</span> headers additional headers
+     * <span class="hljs-doctag">@return</span> the HTTP response from the POST request
+     * <span class="hljs-doctag">@throws</span> ClientProtocolException in case of an HTTP protocol error
+     * <span class="hljs-doctag">@throws</span> IOException in case of a problem or the connection was aborted
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function">CloseableHttpResponse <span class="hljs-title">postGdsnMessage</span><span class="hljs-params">(String path, HttpEntity entity, String contentType, List&lt;Header&gt; headers)</span> <span class="hljs-keyword">throws</span> ClientProtocolException, IOException </span>{
+        HttpPost postRequest = <span class="hljs-keyword">new</span> HttpPost(path);
+        postRequest.setEntity(entity);
+        <span class="hljs-keyword">if</span> (headers != <span class="hljs-keyword">null</span>) {
+            postRequest.setHeaders(headers.toArray(<span class="hljs-keyword">new</span> Header[headers.size()]));
+        }
+        postRequest.setHeader(HTTP_HEADER_CONTENT_TYPE, contentType);
+        assignCrenditialToHttpRequest(postRequest);
+
+        CloseableHttpResponse response = httpClient.execute(postRequest);
+        credential.setParamsFromHTTPResponse(response);
+        <span class="hljs-keyword">return</span> response;
+        }</code></pre><h5 id="response-for-the-post-gdsn-message."><a class="header-link" href="#response-for-the-post-gdsn-message."></a>Response for the post GDSN message.</h5>
+<pre class="hljs"><code>    Upon succesful we will receive <span class="hljs-number">201</span> as status <span class="hljs-selector-tag">code</span>.
+    As <span class="hljs-selector-tag">a</span> response <span class="hljs-selector-tag">body</span> we will receive payload
+    {
+      <span class="hljs-string">"status"</span>: <span class="hljs-string">"Created"</span>,
+      <span class="hljs-string">"id"</span>: <span class="hljs-string">"4260431039925/385bdfe4-f1b7-4ce6-94a7-dfahnf"</span>
+    }
+</code></pre><h3 id="if-we-want-to-get-the-cin-message-from-b-synced"><a class="header-link" href="#if-we-want-to-get-the-cin-message-from-b-synced"></a>If we want to get the CIN message from b-synced</h3>
+<h5 id="endpoints-to-the-b-synced-for-getting-a-cin-message."><a class="header-link" href="#endpoints-to-the-b-synced-for-getting-a-cin-message."></a>Endpoints to the b-synced for getting a CIN message.</h5>
+<pre class="hljs"><code>    . Production <span class="hljs-symbol">environment:</span> <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/app.b-synced.io/api</span><span class="hljs-regexp">/v1/gdsn</span><span class="hljs-regexp">/messages/</span>{id}
+    . Test <span class="hljs-symbol">environment:</span> <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/test.b-synced.io/api</span><span class="hljs-regexp">/v1/gdsn</span><span class="hljs-regexp">/messages/</span>{id}</code></pre><h5 id="method-type-1"><a class="header-link" href="#method-type-1"></a>Method type</h5>
+<pre class="hljs"><code>    [GET]</code></pre><h5 id="headers-1"><a class="header-link" href="#headers-1"></a>Headers</h5>
+<pre class="hljs"><code><span class="hljs-attr">    access-token:</span> &lt;access-token<span class="hljs-string">&gt;
+</span><span class="hljs-attr">    client:</span> &lt;client<span class="hljs-string">&gt;
+</span><span class="hljs-attr">    uid:</span> &lt;uid<span class="hljs-string">&gt;
+</span><span class="hljs-attr">    Content-type:</span> applciation/xml</code></pre><h5 id="code-snippet.-1"><a class="header-link" href="#code-snippet.-1"></a>Code snippet.</h5>
+<pre class="hljs"><code>    /**
+     * Wrapper <span class="hljs-keyword">for</span> HTTP getGdsnMessage method
+     *
+     * It validates <span class="hljs-keyword">and</span> store the credentials automatically
+     *
+     * @param path URL of the HTTP <span class="hljs-built_in">request</span>
+     * @param headers additional headers
+     * @return the HTTP <span class="hljs-built_in">response</span> from the <span class="hljs-keyword">GET</span> <span class="hljs-built_in">request</span>
+     * @throws ClientProtocolException <span class="hljs-keyword">in</span> <span class="hljs-keyword">case</span> of an HTTP protocol <span class="hljs-keyword">error</span>
+     * @throws IOException <span class="hljs-keyword">in</span> <span class="hljs-keyword">case</span> of a problem <span class="hljs-keyword">or</span> the connection was aborted
+     */
+    <span class="hljs-keyword">public</span> CloseableHttpResponse getGdsnMessage(<span class="hljs-built_in">String</span> path, List&lt;Header&gt; headers) throws ClientProtocolException, IOException {
+
+        HttpGet getRequest = <span class="hljs-keyword">new</span> HttpGet(path);
+        <span class="hljs-keyword">if</span> (headers != <span class="hljs-literal">null</span>) {
+            getRequest.setHeaders(headers.toArray(<span class="hljs-keyword">new</span> Header[headers.size()]));
+        }
+        getRequest.setHeader(HTTP_HEADER_CONTENT_TYPE, APPLICATION_JSON);
+        assignCrenditialToHttpRequest(getRequest);
+
+        CloseableHttpResponse <span class="hljs-built_in">response</span> = httpClient.<span class="hljs-keyword">execute</span>(getRequest);
+        credential.setParamsFromHTTPResponse(<span class="hljs-built_in">response</span>);
+        return <span class="hljs-built_in">response</span>;
+    }</code></pre><h5 id="response-for-the-get-gdsn-message-from-the-b-synced."><a class="header-link" href="#response-for-the-get-gdsn-message-from-the-b-synced."></a>Response for the get GDSN message from the b-synced.</h5>
+<pre class="hljs"><code>    Upon succesful we will receive <span class="hljs-number">200</span> <span class="hljs-keyword">as</span> status code.
+    As <span class="hljs-keyword">a</span> response body we will receive payload
+    &lt;?xml <span class="hljs-keyword">version</span>=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"UTF-8"</span>?&gt;
+&lt;catalogue_item_notification:catalogueItemNotificationMessage xmln<span class="hljs-variable">s:sh</span>=<span class="hljs-string">"http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader"</span>
+                                                              xmln<span class="hljs-variable">s:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span>
+                                                              xmln<span class="hljs-variable">s:catalogue_item_notification</span>=<span class="hljs-string">"urn:gs1:gdsn:catalogue_item_notification:xsd:3"</span>
+                                                              xsi:schemaLocation=<span class="hljs-string">"http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader http://www.gs1globalregistry.net/3.1/schemas/sbdh/StandardBusinessDocumentHeader.xsd urn:gs1:gdsn:catalogue_item_notification:xsd:3 http://www.gs1globalregistry.net/3.1/schemas/gs1/gdsn/CatalogueItemNotification.xsd"</span>&gt;
+   &lt;<span class="hljs-keyword">sh</span>:StandardBusinessDocumentHeader&gt;
+...
+
+</code></pre><h5 id="like-wise-bsyncedapiclient-is-offering-so-many-services-we-can-use-them.-the-bsyncedapiclient-is-offering-the-following-services."><a class="header-link" href="#like-wise-bsyncedapiclient-is-offering-so-many-services-we-can-use-them.-the-bsyncedapiclient-is-offering-the-following-services."></a>Like wise BSyncedAPIClient is offering so many services we can use them. The BSyncedAPIClient is offering the following services.</h5>
+<pre class="hljs"><code>    <span class="hljs-number">1</span>) postCustomState
+    <span class="hljs-number">2</span>) getCustomState
+    <span class="hljs-number">3</span>) putCustomState
+    <span class="hljs-number">4</span>) getCompanyByID
+    <span class="hljs-number">5</span>) getUserByID
+    <span class="hljs-number">6</span>) updateCompanyName
+    <span class="hljs-number">7</span>) updateCompanyAddress
+    <span class="hljs-number">8</span>) updateUserName
+    <span class="hljs-number">9</span>) getMessageCollection
+    <span class="hljs-number">10</span>) getMessageCount
+</code></pre>    </article>
+  </body>
+</html>

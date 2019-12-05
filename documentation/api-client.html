@@ -1,0 +1,185 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <title>Getting Started with b-synced API client</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/hljs-github.min.css"/>
+  </head>
+  <body>
+    <article class="markdown-body"><h1 id="getting-started-with-b-synced-api-client"><a class="header-link" href="#getting-started-with-b-synced-api-client"></a>Getting Started with b-synced API client</h1>
+<p>Our API client provides a programmatic way to access various functionalities of b-synced API.</p>
+<h2 id="getting-started"><a class="header-link" href="#getting-started"></a>Getting Started</h2>
+<p>These instructions will get you a copy of the project up and running for testing purposes.</p>
+<h2 id="prerequisites"><a class="header-link" href="#prerequisites"></a>Prerequisites</h2>
+<ol class="list">
+<li><p>Make sure you have an valid account for using b-synced. You can self-registered via <a href="https://app.b-synced.io/signup">https://app.b-synced.io/signup</a>.</p>
+</li>
+<li><p>We will perform verification regarding the authenticity of the GLN, before then, you cannot perform GDSN-related actions</p>
+</li>
+<li><p>Once everything is done, you will get a confirmation mail.So that you can activate your account by clicking confirm my account.</p>
+</li>
+<li><p>API Documentation ,Detailed description of all available API endpoints can be found at <a href="https://app.b-synced.io/documentation/api">https://app.b-synced.io/documentation/api</a> .</p>
+</li>
+</ol>
+<h2 id="installing"><a class="header-link" href="#installing"></a>Installing</h2>
+<ol class="list">
+<li><p>Fork the following repository: <a href="https://bitbucket.org/bctechnologies/b-synced-java-api-client">bctechnologies/b-synced-java-api-client</a></p>
+</li>
+<li><p>Clone your resulting remote repository.</p>
+</li>
+<li><p>Configure the Git dependencies, i.e. adjust <code>b-synced-java-api-client/.git/config</code> as follows:</p>
+</li>
+</ol>
+<pre class="hljs"><code>    [remote <span class="hljs-string">"origin"</span>]
+        url = http<span class="hljs-variable">s:</span>//<span class="hljs-symbol">&lt;username&gt;</span>@bitbucket.org/bctechnologies/<span class="hljs-keyword">b</span>-synced-java-api-client.git
+        fetch = +refs/heads/*:refs/remotes/origin/*
+    [remote <span class="hljs-string">"&lt;username&gt;"</span>]
+        url = http<span class="hljs-variable">s:</span>//<span class="hljs-symbol">&lt;username&gt;</span>@bitbucket.org/<span class="hljs-symbol">&lt;username&gt;</span>/<span class="hljs-keyword">b</span>-synced-java-api-client.git
+        fetch = +refs/heads/*:refs/remotes/<span class="hljs-symbol">&lt;username&gt;</span>/*
+    [branch <span class="hljs-string">"master"</span>]
+        remote = origin
+        merge = refs/heads/master
+    [branch <span class="hljs-string">"upstream"</span>]
+        remote = <span class="hljs-symbol">&lt;username&gt;</span>
+        merge = refs/heads/upstream</code></pre><p>4.Build the API client by executing command,generates api-1.0.0.jar in target folder. </p>
+<pre class="hljs"><code><span class="hljs-symbol">cd</span> <span class="hljs-keyword">b-synced-java-api-client
+</span><span class="hljs-keyword">mvn </span>package -Dmaven.test<span class="hljs-meta">.skip</span><span class="hljs-symbol">=true</span></code></pre><ol start="5">
+<li>Copy jar file to repositories by executing command.</li>
+</ol>
+<pre class="hljs"><code>mvn install:install-file <span class="hljs-attr">-Dfile=/b-synced-java-api-client/target/api-1.0.0.jar</span> <span class="hljs-attr">-DgroupId=de.bctechnologies</span> <span class="hljs-attr">-DartifactId=api</span> <span class="hljs-attr">-Dversion=1.0.0</span> <span class="hljs-attr">-Dpackaging=jar</span></code></pre><h2 id="run-tests"><a class="header-link" href="#run-tests"></a>Run Tests</h2>
+<p>To run tests for this system ,please provide <strong>login,password and host </strong> as common parameters.</p>
+<h2 id="users"><a class="header-link" href="#users"></a>Users</h2>
+<h6 id="retrieve-a-user"><a class="header-link" href="#retrieve-a-user"></a>Retrieve a User</h6>
+<p>Retrieve a User with the given ID.Value of ID  can be set to myself to retrieve the current User.Login the user and retrieve the Token.</p>
+<p>Input :</p>
+<p>id : string (required)The ID of the desired User,ID can be set to myself to retrieve the current User.</p>
+<pre class="hljs"><code>mvn test <span class="hljs-attr">-Dtest=BSyncedAPIUserTest</span> <span class="hljs-attr">-Duser=srividya.gangumalla@techwave.net</span> <span class="hljs-attr">-Dpassword=testtest</span> <span class="hljs-attr">-Dhost=35.227.254.108</span>
+</code></pre><p>Output: Displays the Token in console.</p>
+<pre class="hljs"><code><span class="hljs-keyword">Token</span>:   4Ix6ALrPMa_IF4rOzCwx-<span class="hljs-built_in">w</span>
+</code></pre><h2 id="companies"><a class="header-link" href="#companies"></a>Companies</h2>
+<h6 id="retrieve-a-company"><a class="header-link" href="#retrieve-a-company"></a>Retrieve a Company</h6>
+<p>Retrieve a Company with the given Company ID.</p>
+<p>Input :</p>
+<p>id : string (required)The ID of the desired Company,ID can be set to myself to retrieve the current Company</p>
+<pre class="hljs"><code>mvn test <span class="hljs-attr">-Dtest=BSyncedAPICompaniesTest#testGetCompanyByID</span> <span class="hljs-attr">-Duser=srividya.gangumalla@techwave.net</span> <span class="hljs-attr">-Dpassword=testtest</span> <span class="hljs-attr">-Dhost=35.227.254.108</span></code></pre><p>Output: Display the Company Details.</p>
+<pre class="hljs"><code><span class="hljs-symbol"> Id:</span> <span class="hljs-number">4641</span>c9c7<span class="hljs-number">-0</span>bd8<span class="hljs-number">-4</span>a8f<span class="hljs-number">-91</span>aa<span class="hljs-number">-4</span>a9f29bbf2e8
+<span class="hljs-symbol"> Name:</span> ABC GmbH
+<span class="hljs-symbol"> Address:</span> Agrippinawerft <span class="hljs-number">30</span>, <span class="hljs-number">50678</span> Köln
+<span class="hljs-symbol"> GLN:</span> <span class="hljs-number">8380160030003</span>
+</code></pre><h6 id="retrieve-the-name"><a class="header-link" href="#retrieve-the-name"></a>Retrieve the Name</h6>
+<p>Retrieve the Name with the given Company ID.</p>
+<p>Input :
+id : string (required)The ID of the desired Company,ID can be set to myself to retrieve the current Company</p>
+<pre class="hljs"><code>mvn test <span class="hljs-attr">-Dtest=BSyncedAPICompaniesTest#testGetCompanyNameByID</span> <span class="hljs-attr">-Duser=srividya.gangumalla@techwave.net</span> <span class="hljs-attr">-Dpassword=testtest</span> <span class="hljs-attr">-Dhost=35.227.254.108</span></code></pre><p>Output: Display the Company Details.</p>
+<pre class="hljs"><code> Id: 4641c9c7<span class="hljs-string">-0</span>bd8<span class="hljs-string">-4</span>a8f<span class="hljs-string">-91</span>aa<span class="hljs-string">-4</span>a9f29bbf2e8
+ Name: ABC GmbH
+</code></pre><h6 id="retrieve-the-address"><a class="header-link" href="#retrieve-the-address"></a>Retrieve the Address</h6>
+<p>Retrieve the Address with the given Company ID.</p>
+<p>Input :
+id : string (required)The ID of the desired Company,ID can be set to myself to retrieve the current Company</p>
+<pre class="hljs"><code>mvn test <span class="hljs-attr">-Dtest=BSyncedAPICompaniesTest#testGetCompanyAddressByID</span> <span class="hljs-attr">-Duser=srividya.gangumalla@techwave.net</span> <span class="hljs-attr">-Dpassword=testtest</span> <span class="hljs-attr">-Dhost=35.227.254.108</span></code></pre><p>Output: Display the Company Details.</p>
+<pre class="hljs"><code> Id: 4641c9c7<span class="hljs-string">-0</span>bd8<span class="hljs-string">-4</span>a8f<span class="hljs-string">-91</span>aa<span class="hljs-string">-4</span>a9f29bbf2e8
+ Address: Agrippinawerft 30, 50678 Köln
+</code></pre><h2 id="gdsn-messages"><a class="header-link" href="#gdsn-messages"></a>GDSN Messages</h2>
+<h6 id="sending-message"><a class="header-link" href="#sending-message"></a>Sending Message</h6>
+<p>Sending CIN/CIP message to b-synced API.Post GDSNMessage by providing cin/cip xml file path.</p>
+<p>Input :</p>
+<p>filepath: string(required)Example filepath=/home/techwave/cin.xml</p>
+<pre class="hljs"><code>mvn test <span class="hljs-attr">-Dtest=BSyncedAPIPostMessageTest</span> <span class="hljs-attr">-Duser=srividya.gangumalla@techwave.net</span> <span class="hljs-attr">-Dpassword=testtest</span> <span class="hljs-attr">-Dhost=35.227.254.108</span> <span class="hljs-attr">-Dfilepath=/home/techwave/cin.xml</span></code></pre><p>Output: Display the success if the Message is created.</p>
+<pre class="hljs"><code>The <span class="hljs-keyword">message</span> created successfully
+</code></pre><h6 id="retrieve-message"><a class="header-link" href="#retrieve-message"></a>Retrieve Message</h6>
+<p>Retrieve corresponding GS1Response message from b-synced API by messageid. </p>
+<p>Input :</p>
+<p>id : string (required) Example: 8380160030003/cbe4427e-0878-4f8d-b5b4-4522e30c816d the id of message.</p>
+<pre class="hljs"><code>mvn test -Dtest=BSyncedAPIMessagesTest#testGetMessageByID -Duser=srividya.gangumalla@techwave.net -Dpassword=testtest -Dhost=<span class="hljs-number">35.227</span><span class="hljs-number">.254</span><span class="hljs-number">.108</span> -Did=<span class="hljs-number">8380160030003</span>/cbe4427e<span class="hljs-number">-0878</span><span class="hljs-number">-4</span>f8d-b5b4<span class="hljs-number">-4522e30</span>c816d</code></pre><p>Output:Displays the GS1Respone Message for the id.</p>
+<pre class="hljs"><code>***********GS1Respone Message ***********
+
+<span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"UTF-8"</span><span class="hljs-meta">?&gt;</span></span>
+<span class="hljs-tag">&lt;<span class="hljs-name">catalogue_item_notification:catalogueItemNotificationMessage</span>&gt;</span>
+    ...
+<span class="hljs-tag">&lt;/<span class="hljs-name">catalogue_item_notification:catalogueItemNotificationMessage</span>&gt;</span>
+</code></pre><h2 id="retrieve-message-collection"><a class="header-link" href="#retrieve-message-collection"></a>Retrieve Message Collection</h2>
+<p>Retrieve inbound/outbound messages for the company of the current user.</p>
+<p>Input :</p>
+<pre class="hljs"><code>direction:
+    string (required) Example: outbound
+    Choices: inbound outbound 
+messageType:
+    string (optional) Example: catalogueItemNotification
+    corresponds to the type of GDSN Messages
+    Choices: catalogueItemNotification catalogueItemPublication catalogueItemSubscription 
+             catalogueItemRegistrationResponse registryCatalogueItem 
+             requestForCatalogueItemNotification catalogueItemConfirmation
+             catalogueItemHierarchicalWithdrawal gS1Response:Exception gS1Response:Success 
+page:
+    number (required) Example: 1
+    page number
+perPage:
+    number (required) Example: 10
+    number of records per page
+from:
+    string (optional) Example: 20160915T155300Z
+    the <span class="hljs-keyword">start</span> <span class="hljs-keyword">timestamp</span> (ISO8601 <span class="hljs-keyword">format</span>)
+<span class="hljs-keyword">to</span>:
+    <span class="hljs-keyword">string</span> (optional) Example: <span class="hljs-number">20161015</span>T155300Z
+    the <span class="hljs-keyword">end</span> <span class="hljs-keyword">timestamp</span> (ISO8601 <span class="hljs-keyword">format</span>)
+<span class="hljs-keyword">order</span>:
+    <span class="hljs-keyword">string</span> (optional) <span class="hljs-keyword">Default</span>: submitted_at Example: submitted_at
+    <span class="hljs-keyword">field</span> <span class="hljs-keyword">to</span> be ordered
+    Choices: sender receiver submitted_at 
+<span class="hljs-keyword">by</span>:
+    <span class="hljs-keyword">string</span> (optional) <span class="hljs-keyword">Default</span>: <span class="hljs-keyword">DESC</span> Example: <span class="hljs-keyword">DESC</span>
+    <span class="hljs-keyword">use</span> together <span class="hljs-keyword">with</span> <span class="hljs-keyword">order</span>
+    Choices: <span class="hljs-keyword">ASC</span> <span class="hljs-keyword">DESC</span> 
+<span class="hljs-keyword">query</span>:
+    <span class="hljs-keyword">string</span> (optional) Example: <span class="hljs-string">"ABC GmbH"</span>
+    <span class="hljs-keyword">query</span> <span class="hljs-keyword">string</span> <span class="hljs-keyword">for</span> the GDSN Message <span class="hljs-keyword">content</span></code></pre><pre class="hljs"><code>mvn test <span class="hljs-attr">-Dtest=BSyncedAPIMessagesTest#testGetMessages</span> <span class="hljs-attr">-Duser=srividya.gangumalla@techwave.net</span> <span class="hljs-attr">-Dpassword=testtest</span> <span class="hljs-attr">-Dhost=35.227.254.108</span></code></pre><p>Output: Displays all message details.</p>
+<pre class="hljs"><code>Total <span class="hljs-string">Messages :</span> <span class="hljs-number">8</span>
+<span class="hljs-string">data:</span> [
+{
+<span class="hljs-string">id:</span> <span class="hljs-number">8380160030003</span>/d9f4ee52<span class="hljs-number">-6</span>a45<span class="hljs-number">-496</span>f-b1ca-fdeb6f68b000
+<span class="hljs-string">kind:</span> catalogueItemPublication
+<span class="hljs-string">sender:</span> <span class="hljs-number">8380160030003</span>
+<span class="hljs-string">receiver:</span> <span class="hljs-number">4049111170017</span>
+<span class="hljs-string">submittedAt:</span> <span class="hljs-number">2019</span><span class="hljs-number">-03</span><span class="hljs-number">-26</span><span class="hljs-string">T06:</span><span class="hljs-number">15</span>:<span class="hljs-number">07.099</span>Z
+},
+{
+<span class="hljs-string">id:</span> <span class="hljs-number">8380160030003</span>/cbe4427e<span class="hljs-number">-0878</span><span class="hljs-number">-4</span>f8d-b5b4<span class="hljs-number">-4522e30</span>c816d
+<span class="hljs-string">kind:</span> catalogueItemNotification
+<span class="hljs-string">sender:</span> <span class="hljs-number">8380160030003</span>
+<span class="hljs-string">receiver:</span> <span class="hljs-number">4260590810014</span>
+<span class="hljs-string">submittedAt:</span> <span class="hljs-number">2019</span><span class="hljs-number">-03</span><span class="hljs-number">-22</span><span class="hljs-string">T10:</span><span class="hljs-number">27</span>:<span class="hljs-number">27.029</span>Z
+}
+...
+]
+</code></pre><p>Displays the message details with query contains LOGOCOS.</p>
+<pre class="hljs"><code>mvn test <span class="hljs-attr">-Dtest=BSyncedAPIMessagesTest#testGetMessages</span> <span class="hljs-attr">-Duser=srividya.gangumalla@techwave.net</span> <span class="hljs-attr">-Dpassword=testtest</span> <span class="hljs-attr">-Dhost=35.227.254.108</span> <span class="hljs-attr">-Dquery=LOGOCOS</span></code></pre><p>Output:Display the messages which contains LOGOCOS</p>
+<pre class="hljs"><code>Total <span class="hljs-string">Messages :</span> <span class="hljs-number">1</span>
+<span class="hljs-string">data:</span> [
+{
+<span class="hljs-string">id:</span> <span class="hljs-number">8380160030003</span>/cbe4427e<span class="hljs-number">-0878</span><span class="hljs-number">-4</span>f8d-b5b4<span class="hljs-number">-4522e30</span>c816d
+<span class="hljs-string">type:</span> catalogueItemNotification
+<span class="hljs-string">sender:</span> <span class="hljs-number">8380160030003</span>
+<span class="hljs-string">receiver:</span> <span class="hljs-number">4260590810014</span>
+<span class="hljs-string">submittedAt:</span> <span class="hljs-number">2019</span><span class="hljs-number">-03</span><span class="hljs-number">-22</span><span class="hljs-string">T10:</span><span class="hljs-number">27</span>:<span class="hljs-number">27.029</span>Z
+}
+]
+</code></pre><p>Similar way we can provide the values for all parameters.</p>
+<h2 id="retrieve-message-count"><a class="header-link" href="#retrieve-message-count"></a>Retrieve Message Count</h2>
+<p>Retrieve the count of inbound/outbound messages for the company of the current user, If both fromTimestamp and toTimestamp are not included, the total inbound/outbound message count is returned.</p>
+<p>Input :</p>
+<pre class="hljs"><code>direction
+    <span class="hljs-keyword">string</span> (required) Example: outbound
+    Choices: inbound outbound 
+<span class="hljs-built_in">from</span>
+    <span class="hljs-keyword">string</span> (optional) Example: <span class="hljs-number">20190915</span>T155300Z
+    <span class="hljs-keyword">the</span> <span class="hljs-built_in">start</span> timestamp (ISO8601 <span class="hljs-built_in">format</span>)
+<span class="hljs-built_in">to</span>
+    <span class="hljs-keyword">string</span> (optional) Example: <span class="hljs-number">20190915</span>T155300Z
+    <span class="hljs-keyword">the</span> <span class="hljs-function"><span class="hljs-keyword">end</span> <span class="hljs-title">timestamp</span> (<span class="hljs-title">ISO8601</span> <span class="hljs-title">format</span>)</span></code></pre><pre class="hljs"><code>mvn test <span class="hljs-attr">-Dtest=BSyncedAPIMessageStatisticsTest</span> <span class="hljs-attr">-Duser=srividya.gangumalla@techwave.net</span> <span class="hljs-attr">-Dpassword=testtest</span> <span class="hljs-attr">-Dhost=35.227.254.108</span> <span class="hljs-attr">-Ddirection=outbound</span> <span class="hljs-attr">-Dfrom=20190915T155300Z</span> <span class="hljs-attr">-Dto=20190915T155300Z</span></code></pre><p>Output: Displays the messages count</p>
+<pre class="hljs"><code><span class="hljs-symbol">Count:</span> <span class="hljs-number">10</span></code></pre>    </article>
+  </body>
+</html>
