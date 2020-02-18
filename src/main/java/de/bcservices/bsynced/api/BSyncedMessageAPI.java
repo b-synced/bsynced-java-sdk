@@ -69,6 +69,46 @@ public class BSyncedMessageAPI {
     }
 
     /**
+     * This method is used to retrieve message collection with the given parameters, provided that "fromId" is known. This replaces "from" and "to" timestamps.
+     * @param direction
+     * @param messageType
+     * @param page
+     * @param perPage
+     * @param fromId
+     * @param order
+     * @param orderBy
+     * @param query
+     * @return
+     * @throws BSyncedException
+     */
+    public CloseableHttpResponse getMessageCollection(String direction, String messageType, int page, int perPage,
+            String fromId, String order, String orderBy, String query) throws BSyncedException {
+        String path = this.apiContext.getPath() + API_PATH_GDSN + direction + "/messages";
+
+        path += "/?page=" + page + "&perPage=" + perPage;
+
+        if (messageType != null && !messageType.isEmpty()) {
+            path += "&messageType=" + messageType;
+        }
+        if (fromId != null && !fromId.isEmpty()) {
+            path += "&fromId=" + fromId;
+        }
+        if (order != null && !order.isEmpty()) {
+            path = path + "&order=" + order;
+        }
+        if (orderBy != null && !orderBy.isEmpty()) {
+            path = path + "&by=" + orderBy;
+        }
+        if (query != null && !query.isEmpty()) {
+            try {
+                path = path + "&q=" + URLEncoder.encode(query, StandardCharsets.UTF_8.toString());
+            } catch (UnsupportedEncodingException e) {
+                throw new BSyncedException(e.getMessage(), e);
+            }
+        }
+        return this.apiContext.get(path, new ArrayList<Header>());
+    }
+    /**
      * This method is used to retrieve message collection with the given parameters.
      *
      * @param direction Either "inbound" or "outbound"
@@ -91,7 +131,7 @@ public class BSyncedMessageAPI {
         path += "/?page=" + page + "&perPage=" + perPage;
 
         if (messageType != null && !messageType.isEmpty()) {
-            path += "/?messageType=" + messageType;
+            path += "&messageType=" + messageType;
         }
         if (from != null && !from.isEmpty()) {
             path += "&from=" + from;

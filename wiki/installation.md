@@ -14,7 +14,7 @@ Then add the following dependency to your pom.xml
 
 ```xml
     <dependency>
-        <groupId>de.bctechnologies.bsynced</groupId>
+        <groupId>de.bcservices.bsynced</groupId>
         <artifactId>rest-api-sdk</artifactId>
         <version>1.0.0</version>
     </dependency>
