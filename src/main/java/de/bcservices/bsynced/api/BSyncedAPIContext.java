@@ -49,7 +49,7 @@ public class BSyncedAPIContext {
     private String port = "80";
     private String protocol = "http";
 
-    int timeout = 80;
+    int timeout = 300;
 
     private String apiToken;
 
