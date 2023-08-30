@@ -49,12 +49,12 @@ public class BSyncedAPIContext {
     private String port = "80";
     private String protocol = "http";
 
-    int timeout = 300;
+    int DEFAULT_TIMEOUT = 300;
 
     private String apiToken;
 
-    private RequestConfig config = RequestConfig.custom().setConnectTimeout(timeout * 1000)
-            .setConnectionRequestTimeout(timeout * 1000).setSocketTimeout(timeout * 1000).build();
+    private RequestConfig config = RequestConfig.custom().setConnectTimeout(DEFAULT_TIMEOUT * 1000)
+            .setConnectionRequestTimeout(DEFAULT_TIMEOUT * 1000).setSocketTimeout(DEFAULT_TIMEOUT * 1000).build();
 
     private PoolingHttpClientConnectionManager connectionManager;
 
@@ -92,6 +92,18 @@ public class BSyncedAPIContext {
     public void setConnectionManager(PoolingHttpClientConnectionManager connectionManager) {
         this.connectionManager = connectionManager;
     }
+
+		public void setTimeouts(
+				int connectionTimeout,
+				int connectionRequestTimeout,
+				int socketTimeout
+				) throws 
+			BSyncedException
+		{
+			config = RequestConfig.custom().setConnectTimeout(connectionTimeout)
+            .setConnectionRequestTimeout(connectionRequestTimeout).setSocketTimeout(socketTimeout).build();
+			initConnectionManager();
+		}
 
     /**
      * This method initialises the underlying
